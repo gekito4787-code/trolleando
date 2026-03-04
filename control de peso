@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de Peso</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .contenedor {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 320px;
+            text-align: center;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #imagenAlerta {
+            margin-top: 20px;
+            display: none;
+            animation: mover 0.5s infinite alternate;
+        }
+
+        @keyframes mover {
+            from { transform: translateX(-20px); }
+            to { transform: translateX(20px); }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="contenedor">
+    <h2>Registro</h2>
+
+    <form onsubmit="verificarDatos(event)">
+
+        <label>Género:</label>
+        <select id="genero" required>
+            <option value="">Seleccione</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Femenino">Femenino</option>
+            <option value="Marica">Marica</option>
+        </select>
+
+        <label>Peso (kg):</label>
+        <input type="number" id="peso" placeholder="Ej: 95" required>
+
+        <button type="submit">Verificar</button>
+    </form>
+
+    <div id="resultado"></div>
+
+    <img id="imagenAlerta"
+         src="https://i.pinimg.com/736x/59/78/17/597817aff70806d7e6277b8d1547d9e0.jpg"
+         width="200">
+
+</div>
+
+<script>
+function verificarDatos(event) {
+    event.preventDefault();
+
+    let genero = document.getElementById("genero").value;
+    let peso = parseFloat(document.getElementById("peso").value);
+    let imagen = document.getElementById("imagenAlerta");
+    let resultado = document.getElementById("resultado");
+
+    if (peso > 89) {
+        resultado.innerHTML = "⚠ " + genero + ", CULE GORDA JAJAJAJA";
+        imagen.style.display = "block";
+    } else {
+        resultado.innerHTML = genero + ", tu peso está dentro del rango.";
+        imagen.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>
